@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block title %} {{title}} {% endblock %}
+{% block body %}
+{{content}}
+
+{% for key, user in users %}
+<ul>
+<li>Name: {{user.name}}</li>
+<li>Age: {{user.age}}</li>
+<li>Job: {{user.job}}</li>
+<a href="teste/detalhes/{{user.id}}">Perfil</a>
+</ul>
+{% endfor %}
+
+{% endblock %}

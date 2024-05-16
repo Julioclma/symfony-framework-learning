@@ -8,20 +8,27 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TesteController extends AbstractController
 {
+
+    public $defaultMessage = 'Olá mundo';
+ 
     /**
      * @Route("/teste", name="teste")
      */
     public function index(): Response
     {
-        return new Response('<h1>Página teste!</h1>');
+        $users = [
+            ['id' => 1, 'name' => 'Julio', 'age' => 23, 'job' => 'BackEnd-Developer'],
+            ['id' => 2, 'name' => 'Jamal', 'age' => 19, 'job' => 'FrontEnd-Developer']
+        ];
+        return $this->render('teste/index.html.twig', ['title' => 'Página de teste', 'content' => 'Olá, Página de teste', 'users' => $users, 'defaultMessage' => $this->defaultMessage]);
     }
 
 
-     /**
-     * @Route("/teste/{name}", name="teste-name")
+    /**
+     * @Route("/teste/detalhes/{id}", name="teste-name")
      */
-    public function hello($name): Response
+    public function hello($id): Response
     {
-        return new Response('<h1>Olá, '.$name.'</h1>');
+        return $this->render('teste/detalhes.html.twig', ['id' => $id, 'title' => 'Detalhes', 'defaultMessage' => $this->defaultMessage]);
     }
 }
